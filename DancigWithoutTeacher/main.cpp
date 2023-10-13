@@ -8,15 +8,23 @@ int main() {
 	RenderWindow window(sf::VideoMode(1500, 1000), "선생님 몰래 춤추기");
 
 	Texture background;
+	Texture mainContent;
 
 	background.loadFromFile("image/background.png");
+	mainContent.loadFromFile("image/mainContent.png");
 
 	Sprite backgroundImg(background);
+	Sprite mainContentImg(mainContent);
+
 
 	// 이미지 크기를 창 크기에 맞게 조절 (비율 계산)
 	backgroundImg.setScale(
 		static_cast<float>(window.getSize().x) / background.getSize().x,
 		static_cast<float>(window.getSize().y) / background.getSize().y
+	);
+	mainContentImg.setScale(
+		500.0f / mainContent.getSize().x,
+		220.0f / mainContent.getSize().y
 	);
 
 
@@ -32,8 +40,8 @@ int main() {
 		window.clear(Color::Black);
 
 		window.draw(backgroundImg);
+		window.draw(mainContentImg);
 	
-
 		window.display();
 	}
 }
