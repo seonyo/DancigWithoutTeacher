@@ -5,7 +5,15 @@ using namespace std;
 using namespace sf;
 
 int main() {
-	RenderWindow window(sf::VideoMode(1500, 1000), "선생님 몰래 춤추기");
+	RenderWindow window(sf::VideoMode(1500, 1000), L"선생님 몰래 춤추기");
+
+	Font font;
+
+	if (!font.loadFromFile("C:\\Windows\\Fonts\\H2HDRM.ttf"))
+	{
+		printf("폰트 불러오기 실패");
+		return -1;
+	}
 
 	Texture background;
 	Texture mainContent;
@@ -16,6 +24,7 @@ int main() {
 	Sprite backgroundImg(background);
 	Sprite mainContentImg(mainContent);
 
+	mainContentImg.setPosition(900, 500);
 
 	// 이미지 크기를 창 크기에 맞게 조절 (비율 계산)
 	backgroundImg.setScale(
@@ -24,10 +33,32 @@ int main() {
 	);
 	mainContentImg.setScale(
 		500.0f / mainContent.getSize().x,
-		220.0f / mainContent.getSize().y
+		240.0f / mainContent.getSize().y
 	);
 
+	//버튼 생성
+	RectangleShape rankingBtn(Vector2f(220, 70));
+	rankingBtn.setFillColor(Color(0, 0, 0, 0));
+	rankingBtn.setPosition(900, 770);
+	rankingBtn.setOutlineColor(Color(255, 255, 255));
+	rankingBtn.setOutlineThickness(3);
 
+	Text rankingBtnText(L"랭킹보기", font, 30);
+	rankingBtnText.setFillColor(Color(255,255,255));
+	rankingBtnText.setPosition(947, 785);
+
+	RectangleShape startBtn(Vector2f(220, 70));
+	startBtn.setFillColor(Color(0,99,28));
+	startBtn.setPosition(1150, 770);
+	startBtn.setOutlineColor(Color(0, 99, 28));
+	startBtn.setOutlineThickness(3);
+
+	Text startBtnText(L"게임시작", font, 30);
+	startBtnText.setFillColor(Color(255, 255, 255));
+	startBtnText.setPosition(1200, 785);
+
+
+	
 	while (window.isOpen()) {
 		Event event;
 		while (window.pollEvent(event)) {
@@ -41,7 +72,11 @@ int main() {
 
 		window.draw(backgroundImg);
 		window.draw(mainContentImg);
-	
+		window.draw(rankingBtn);
+		window.draw(rankingBtnText);
+		window.draw(startBtn);
+		window.draw(startBtnText);
+
 		window.display();
 	}
 }
