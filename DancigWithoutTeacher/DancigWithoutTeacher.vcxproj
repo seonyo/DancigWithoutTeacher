@@ -137,9 +137,11 @@
       <ConformanceMode Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ConformanceMode>
     </ClCompile>
     <ClCompile Include="name.cpp" />
+    <ClCompile Include="home.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="all.h" />
+    <ClInclude Include="home.h" />
     <ClInclude Include="name.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

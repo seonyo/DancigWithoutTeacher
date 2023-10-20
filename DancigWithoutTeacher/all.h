@@ -4,4 +4,5 @@
 using namespace std;
 using namespace sf;
 
-#include "name.h";
+#include "name.h"
+#include "home.h";
