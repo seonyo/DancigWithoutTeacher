@@ -1,10 +1,7 @@
-#include <SFML/Graphics.hpp>
-#include <iostream>
-
-using namespace std;
-using namespace sf;
-
+#include "all.h"
+          
 int main() {
+
 	RenderWindow window(sf::VideoMode(1500, 1000), L"선생님 몰래 춤추기");
 
 	Font font;
@@ -14,7 +11,6 @@ int main() {
 		printf("폰트 불러오기 실패");
 		return -1;
 	}
-
 	Texture background;
 	Texture mainContent;
 
@@ -64,6 +60,15 @@ int main() {
 		while (window.pollEvent(event)) {
 			if (event.type == Event::Closed) {
 				window.close();
+			}
+
+			if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
+				Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
+				
+				if (startBtn.getGlobalBounds().contains(mousePos)) {
+					cout << "눌러졌댜능" << endl;
+					newWindow();
+				}
 			}
 
 		}
