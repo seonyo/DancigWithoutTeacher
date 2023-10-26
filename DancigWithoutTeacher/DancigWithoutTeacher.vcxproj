@@ -138,6 +138,8 @@
     </ClCompile>
     <ClCompile Include="name.cpp" />
     <ClCompile Include="home.cpp" />
+    <ClCompile Include="teacherSelect.cpp" />
+    <ClCompile Include="teacherSelect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="all.h" />

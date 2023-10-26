@@ -6,3 +6,4 @@ using namespace sf;
 
 #include "name.h"
 #include "home.h";
+#include "teacherSelect.h";
