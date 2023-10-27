@@ -59,11 +59,11 @@ void newWindow() {
 			}
 			else if (event.type == Event::TextEntered) {	//text를 눌렀을 대
 				if (event.text.unicode < 128) {		//unicode가 128 이하이면
-					if (event.text.unicode == 8 && !inputString.empty()) {		//empty가 비지 않고, bacakspace를 눌렀으면 pop
-						inputString.pop_back();		//
+					if (event.text.unicode == 8 && !inputString.empty()) {		//empty가 비지 않고, bacakspace를 눌렀으면
+						inputString.pop_back();		// pop 하기
 					}
 					else {
-						inputString += static_cast<char>(event.text.unicode);	//아니면 inputString에 추가하기
+						inputString += static_cast<char>(event.text.unicode);	//아니면 inputString에 추가하기, static_cast는 형변환
 					}
 					inputText.setString(inputString);	//inputText에 inputString 넣기
 				}
