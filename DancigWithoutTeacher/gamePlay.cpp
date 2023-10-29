@@ -27,10 +27,24 @@ void gamePlay() {
 		}
 
 		float elapsedTime = clock.restart().asSeconds();
-		timeRemaining -= elapsedTime;
-
 		float timebarWidth = (timeRemaining / totalTime) * 800;
 		timeBar.setSize(Vector2f(timebarWidth, 80));
+
+		if (Keyboard::isKeyPressed(Keyboard::Space)) {
+			timeRemaining += elapsedTime;
+			timebarWidth = (timeRemaining / totalTime) * 800;
+			if (timebarWidth > 800) {
+				timebarWidth = 800;
+			}
+			timeBar.setSize(Vector2f(timebarWidth, 80));
+		}
+
+		else {
+			timeRemaining -= elapsedTime;
+			timebarWidth = (timeRemaining / totalTime) * 800;
+			timeBar.setSize(Vector2f(timebarWidth, 80));
+		}
+
 
 		if (timeRemaining <= 0) {
 			cout << "타임아웃오바" << endl;
