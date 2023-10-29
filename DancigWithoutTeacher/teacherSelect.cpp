@@ -86,7 +86,7 @@ void teacherSelect() {
 				if (startBtn.getGlobalBounds().contains(mousePos)) {
 					cout << "´­·¯Á³´ô´É" << endl;
 					window.close();
-					newWindow();
+					gamePlay();
 				}
 			}
 

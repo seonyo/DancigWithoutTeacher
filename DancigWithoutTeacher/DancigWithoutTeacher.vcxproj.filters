@@ -30,6 +30,9 @@
     <ClCompile Include="teacherSelect.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="gamePlay.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="all.h">
@@ -41,5 +44,10 @@
     <ClInclude Include="home.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gamePlay.h">
+      <Filter>헤더 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>
