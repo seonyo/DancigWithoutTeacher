@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gameEnd.cpp" />
     <ClCompile Include="gamePlay.cpp" />
     <ClCompile Include="main.cpp">
       <ConformanceMode Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ConformanceMode>
@@ -144,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="all.h" />
+    <ClInclude Include="gameEnd.h" />
     <ClInclude Include="home.h" />
     <ClInclude Include="name.h" />
   </ItemGroup>

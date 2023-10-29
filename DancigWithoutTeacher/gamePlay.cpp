@@ -1,7 +1,5 @@
 #include "all.h"
 
-#include "all.h"
-
 void gamePlay() {
 	RenderWindow window(sf::VideoMode(1500, 1000), L"¼±»ý´Ô ¸ô·¡ ÃãÃß±â");
 
@@ -33,6 +31,12 @@ void gamePlay() {
 
 		float timebarWidth = (timeRemaining / totalTime) * 800;
 		timeBar.setSize(Vector2f(timebarWidth, 80));
+
+		if (timeRemaining <= 0) {
+			cout << "Å¸ÀÓ¾Æ¿ô¿À¹Ù" << endl;
+			window.close();
+;			gameEnd();
+		}
 
 		window.clear(Color::Black);
 

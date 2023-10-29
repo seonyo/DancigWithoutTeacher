@@ -8,3 +8,4 @@ using namespace sf;
 #include "home.h";
 #include "teacherSelect.h";
 #include "gamePlay.h"
+#include "gameEnd.h"
