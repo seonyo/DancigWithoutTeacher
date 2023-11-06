@@ -5,7 +5,7 @@ void teacherSelect() {
 
 	Font font;
 
-	if (!font.loadFromFile("C:\\Windows\\Fonts\\H2HDRM.ttf"))
+	if (!font.loadFromFile("C:\\Windows\\Fonts\\JalnanGothicTTF.ttf"))
 	{
 		printf("폰트 불러오기 실패");
 	}
