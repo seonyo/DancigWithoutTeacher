@@ -5,9 +5,8 @@ void gamePlay() {
 
 	Font font;
 	Music music;
-
 	
-	if (!font.loadFromFile("C:\\Windows\\Fonts\\JalnanGothicTTF.ttf"))
+	if (!font.loadFromFile("Font/JalnanGothicTTF.ttf"))
 	{
 		printf("폰트 불러오기 실패");
 	}

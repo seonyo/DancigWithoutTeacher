@@ -5,7 +5,7 @@ void home() {
 
 	Font font;
 
-	if (!font.loadFromFile("C:\\Windows\\Fonts\\JalnanGothicTTF.ttf"))
+	if (!font.loadFromFile("Font/JalnanGothicTTF.ttf"))
 	{
 		cout << "폰트를 불러오는 데 실패했습니다." << endl;
 	}
