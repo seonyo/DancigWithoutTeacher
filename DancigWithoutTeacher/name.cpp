@@ -1,6 +1,27 @@
 #include "all.h"
 
 void newWindow() {
+
+	//DB 연결
+	MYSQL Conn;		//db 정보를 담는 것
+	MYSQL* ConnPtr = NULL;		//db 핸들
+	MYSQL_RES* Result;		// 쿼리 성공시 결과를 담는 구조체 포인터
+	MYSQL_ROW Rpw;		//쿼리 성공시 결과로 나온 행의 정보를 담는 구조체
+	int Stat;		// 쿼리요청 후 결과 (성공, 실패)
+
+	mysql_init(&Conn);		//정보 초기화
+
+	ConnPtr = mysql_real_connect(&Conn, "localhost", "root", "990327", "DancingWithoutTeacher", 3306, (char*)NULL, 0);
+
+
+	if (ConnPtr == NULL) {
+		fprintf(stderr, "MYsql connection error : %s", mysql_error(&Conn));
+	}
+	else {
+		printf("연결 성공...\n");
+	}
+
+
 	RenderWindow window(sf::VideoMode(1500, 1000), L"선생님 몰래 춤추기");
 
 	Font font;
@@ -73,7 +94,15 @@ void newWindow() {
 				Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
 
 				if (nextBtn.getGlobalBounds().contains(mousePos)) {
-					cout << "눌러졌댜능" << endl;
+					string query = "INSERT INTO info (name) VALUES ('" + inputString + "')";
+					const char* Query = query.c_str();		// C Style 문자열로 변환하기 (mysql 쿼리문에선 C스타일만 받기 때문)
+					Stat = mysql_query(ConnPtr, Query);		//쿼리문 성공여부
+
+					if (Stat != 0) {
+						fprintf(stderr, "Mysql qerry error : %s\n", mysql_error(&Conn));
+					}
+
+					mysql_close(ConnPtr);
 					window.close();
 					teacherSelect();
 				}

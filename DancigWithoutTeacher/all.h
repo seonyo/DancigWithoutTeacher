@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <mysql.h>
 
 using namespace std;
 using namespace sf;
