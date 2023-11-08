@@ -5,7 +5,8 @@ void gamePlay() {
 
 	Font font;
 	Music music;
-	
+	Texture background;
+
 	if (!font.loadFromFile("Font/JalnanGothicTTF.ttf"))
 	{
 		printf("폰트 불러오기 실패");
@@ -15,6 +16,15 @@ void gamePlay() {
 		cout << "음원 파일을 열 수 없습니다" << endl;
 		return;
 	}
+
+	background.loadFromFile("image/GamePlayBackground.png");
+
+	Sprite backgroundImg(background);
+
+	backgroundImg.setScale(
+		static_cast<float>(window.getSize().x) / background.getSize().x,
+		static_cast<float>(window.getSize().y) / background.getSize().y
+	);
 
 	RectangleShape timeBar(Vector2f(800, 80));
 	timeBar.setFillColor(Color(0, 99, 28));
@@ -69,7 +79,8 @@ void gamePlay() {
 		}
 
 		window.clear(Color::Black);
-
+		
+		window.draw(backgroundImg)
 		window.draw(timeBar);
 
 		window.display();
