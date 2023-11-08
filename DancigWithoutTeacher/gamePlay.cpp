@@ -27,8 +27,8 @@ void gamePlay() {
 	);
 
 	RectangleShape timeBar(Vector2f(800, 80));
-	timeBar.setFillColor(Color(0, 99, 28));
-	timeBar.setPosition(20, 100);
+	timeBar.setFillColor(Color(50, 99, 159));
+	timeBar.setPosition(14, 20);
 
 	Clock clock;
 	float totalTime = 17.0f;
@@ -80,7 +80,7 @@ void gamePlay() {
 
 		window.clear(Color::Black);
 		
-		window.draw(backgroundImg)
+		window.draw(backgroundImg);
 		window.draw(timeBar);
 
 		window.display();
