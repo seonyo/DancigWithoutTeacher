@@ -153,6 +153,7 @@
     <ClInclude Include="gameEnd.h" />
     <ClInclude Include="home.h" />
     <ClInclude Include="name.h" />
+    <ClInclude Include="ranking.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="gamePlay.h" />

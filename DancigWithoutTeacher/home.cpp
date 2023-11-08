@@ -69,6 +69,10 @@ void home() {
 					window.close();
 					newWindow();
 				}
+				if (rankingBtn.getGlobalBounds().contains(mousePos)) {
+					window.close();
+					ranking();
+				}
 			}
 
 		}
