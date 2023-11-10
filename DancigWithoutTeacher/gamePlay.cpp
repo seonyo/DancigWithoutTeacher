@@ -2,11 +2,13 @@
 
 void gamePlay() {
 	RenderWindow window(sf::VideoMode(1500, 1000), L"선생님 몰래 춤추기");
+	int score = 0;
 
 	Font font;
 	Music music;
 	Texture background;
 	Texture teacher;
+	
 
 	if (!font.loadFromFile("Font/JalnanGothicTTF.ttf"))
 	{
@@ -36,10 +38,15 @@ void gamePlay() {
 	timeBar.setFillColor(Color(50, 99, 159));
 	timeBar.setPosition(14, 20);
 
+	Text scoreText(to_string(score), font, 50);
+	scoreText.setPosition(1300, 28);
+	scoreText.setFillColor(Color(50, 99, 159));
+
 	Clock clock;
 	float totalTime = 17.0f;		//17초 동안 실행 (1초에 1f씩 감소)
 	float timeRemaining = totalTime;
-	
+	float scoreTimer = 0.0f; //시간 측정 변수
+
 	bool isSpacePressed = false;		//스페이스 눌림 여부
 
 	while (window.isOpen()) {
@@ -76,17 +83,27 @@ void gamePlay() {
 		}
 		timeBar.setSize(Vector2f(timebarWidth, 80));
 
+		// 0.1초가 지날 때마다 score 1씩 증가
+		scoreTimer += elapsedTime;
+		if (scoreTimer >= 0.1f) {
+			score++;
+			scoreText.setString(to_string(score)); // scoreText 업데이트
+			scoreTimer = 0.0f; // 타이머 초기화
+		}
+
+
 		if (timeRemaining <= 0) {
 			cout << "타임아웃오바" << endl;
 			window.close();
 ;			gameEnd();
-		}
+		} 
 
 		window.clear(Color::Black);
 		
 		window.draw(backgroundImg);
 		window.draw(timeBar);
 		window.draw(teacherImg);
+		window.draw(scoreText);
 
 		window.display();
 	}
