@@ -23,10 +23,16 @@ void ranking() {
 	}
 
 	Texture background;
+	Texture rankigContent;
+	Texture contentBackground;
 
 	background.loadFromFile("image/background.png");
+	rankigContent.loadFromFile("image/rankingContent.png");
+	contentBackground.loadFromFile("image/rankingContentBackground.png");
 
 	Sprite backgroundImg(background);
+	Sprite rankingContemtImg(rankigContent);
+	Sprite contentBackgroundImg(contentBackground);
 
 	// 이미지 크기를 창 크기에 맞게 조절 (비율 계산)
 	backgroundImg.setScale(
@@ -34,17 +40,15 @@ void ranking() {
 		static_cast<float>(window.getSize().y) / background.getSize().y
 	);
 
+	rankingContemtImg.setPosition(650, 100);
+
 	//한글 깨짐 지원
 	mysql_query(ConnPtr, "set session character_set_connection=euckr;");
 	mysql_query(ConnPtr, "set session character_set_results=euckr;");
 	mysql_query(ConnPtr, "set session character_set_client=euckr;");
 
-	const char* Query = "SELECT * FROM info ORDER BY score DESC";
+	const char* Query = "SELECT * FROM info ORDER BY score DESC limit 5";
 	Stat = mysql_query(ConnPtr, Query);
-	if (stat != 0) {
-		fprintf(stderr, "Mysql query error : %s\n", mysql_error(&Conn));
-	}
-
 
 	Result = mysql_store_result(ConnPtr);		//결과 확인하기
 	while ((Row = mysql_fetch_row(Result)) != NULL) {
@@ -61,6 +65,7 @@ void ranking() {
 
 		}
 		window.draw(backgroundImg);
+		window.draw(rankingContemtImg);
 
 		window.display();
 	}
