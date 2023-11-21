@@ -13,6 +13,12 @@ void gamePlay() {
 	Texture teacher;
 	Texture teacher_back;
 	Texture teacher_side;
+	Texture Stu1_front;
+	Texture Stu1_back;
+	Texture Stu2_front;
+	Texture Stu2_back;
+	Texture Stu3_front;
+	Texture Stu3_back;
 
 	uniform_real_distribution<double> dist1(1.0, 8.0);		// 뒤 돌아보고 있을 때의 난수
 	uniform_real_distribution<double> dist2(1.0, 5.0);		// 앞을 보고 있을 때의 난수
@@ -32,7 +38,12 @@ void gamePlay() {
 	teacher.loadFromFile("image/SMS.png");		// 명수 정면 이미지
 	teacher_back.loadFromFile("image/SMS_Back.png");	//명수 뒷모습 이미지
 	teacher_side.loadFromFile("image/SMS_Side.png");		//명수 앞모습 이미지
-
+	Stu1_front.loadFromFile("image/Stu1-1.png");
+	Stu1_back.loadFromFile("image/Stu1-2.png");
+	Stu2_front.loadFromFile("image/Stu2-1.png");
+	Stu2_back.loadFromFile("image/Stu2-2.png");
+	Stu3_front.loadFromFile("image/Stu3-1.png");
+	Stu3_back.loadFromFile("image/Stu3-2.png");
 
 	Sprite backgroundImg(background);
 	Sprite teacherImg(teacher_back);
