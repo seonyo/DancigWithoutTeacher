@@ -14,7 +14,8 @@ void gamePlay() {
 	Texture teacher_back;
 	Texture teacher_side;
 
-	uniform_real_distribution<double> dist(1.0, 8.0);
+	uniform_real_distribution<double> dist1(1.0, 8.0);		// 뒤 돌아보고 있을 때의 난수
+	uniform_real_distribution<double> dist2(1.0, 5.0);		// 앞을 보고 있을 때의 난수
 	
 
 	if (!font.loadFromFile("Font/JalnanGothicTTF.ttf"))
@@ -62,12 +63,12 @@ void gamePlay() {
 	teacherImg.setPosition(1100, 80);
 	teacherImg.setScale(1.3, 1.4);
 
-	float teacherSideTime = 0.3f; 
+	float teacherSideTime = 0.25f; 
 	bool showTeacherSide = false;
 	float showTeacherSideTimer = 0.0f;
 
-	float teacherBackTime = dist(rng);
-	cout << teacherBackTime;
+	float teacherBackTime = dist1(rng);
+	float teacherFrontTime = dist2(rng);
 
 	while (window.isOpen()) {
 		Event event;
@@ -82,26 +83,40 @@ void gamePlay() {
 		timeBar.setSize(Vector2f(timebarWidth, 80));		// 타임바 크기 설정
 
 		if (!showTeacher && showTeacherTimer >= teacherBackTime) {
+			// 선생님 이미지를 옆모습으로 변경하고 타이머 초기화
 			showTeacher = true;
 			teacherImg.setTexture(teacher_side);
-			showTeacherTimer = 0.0f;  // Reset timer
+			showTeacherTimer = 0.0f;
 
+			// 아직 옆모습을 보이지 않았다면
 			if (!showTeacherSide) {
+				// 플래그 설정 및 타이머 초기화
 				showTeacherSide = true;
 				showTeacherSideTimer = 0.0f;  // Reset timer
 			}
 		}
 
+		//뒷모습 타이머 업데이트
 		showTeacherTimer += elapsedTime;
+
 		if (showTeacherSide) {
+			// 옆모습 이미지의 타이머 업데이트
 			showTeacherSideTimer += elapsedTime;
 		}
 
-		// Check if more time has passed than teacherSideTime
+		// 0.3초가 지나면 앞모습
 		if (showTeacherSide && showTeacherSideTimer >= teacherSideTime) {
 			teacherImg.setTexture(teacher);
 			showTeacherSide = false;
 		}
+
+		if (showTeacher && showTeacherTimer >= teacherFrontTime) {
+			showTeacher = false;
+			teacherImg.setTexture(teacher_back);
+			showTeacherTimer = 0.0f;  // 타이머 초기화
+			teacherBackTime = dist1(rng);  // 다음 teacher_back 이미지가 나타날 랜덤 시간 생성
+		}
+
 
 
 		if (Keyboard::isKeyPressed(Keyboard::Space)) {
