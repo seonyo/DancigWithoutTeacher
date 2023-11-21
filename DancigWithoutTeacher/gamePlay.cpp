@@ -1,4 +1,7 @@
 #include "all.h"
+#include <random>
+
+random_device rng;
 
 void gamePlay() {
 	RenderWindow window(sf::VideoMode(1500, 1000), L"선생님 몰래 춤추기");
@@ -8,6 +11,10 @@ void gamePlay() {
 	Music music;
 	Texture background;
 	Texture teacher;
+	Texture teacher_back;
+	Texture teacher_side;
+
+	uniform_real_distribution<double> dist(1.0, 8.0);
 	
 
 	if (!font.loadFromFile("Font/JalnanGothicTTF.ttf"))
@@ -20,19 +27,20 @@ void gamePlay() {
 		return;
 	}
 
-	background.loadFromFile("image/GamePlayBackground.png");
-	teacher.loadFromFile("image/SMS.png");
+	background.loadFromFile("image/GamePlayBackground.png");		//배경 이미지
+	teacher.loadFromFile("image/SMS.png");		// 명수 정면 이미지
+	teacher_back.loadFromFile("image/SMS_Back.png");	//명수 뒷모습 이미지
+	teacher_side.loadFromFile("image/SMS_Side.png");		//명수 앞모습 이미지
+
 
 	Sprite backgroundImg(background);
-	Sprite teacherImg(teacher);
+	Sprite teacherImg(teacher_back);
 
 	backgroundImg.setScale(
 		static_cast<float>(window.getSize().x) / background.getSize().x,
 		static_cast<float>(window.getSize().y) / background.getSize().y
 	);
 
-	teacherImg.setPosition(1000, 100);
-	teacherImg.setScale(1.8, 1.9);
 
 	RectangleShape timeBar(Vector2f(800, 80));
 	timeBar.setFillColor(Color(50, 99, 159));
@@ -49,6 +57,18 @@ void gamePlay() {
 
 	bool isSpacePressed = false;		//스페이스 눌림 여부
 
+	bool showTeacher = false;
+	float showTeacherTimer = 0.0f;
+	teacherImg.setPosition(1100, 80);
+	teacherImg.setScale(1.3, 1.4);
+
+	float teacherSideTime = 0.3f; 
+	bool showTeacherSide = false;
+	float showTeacherSideTimer = 0.0f;
+
+	float teacherBackTime = dist(rng);
+	cout << teacherBackTime;
+
 	while (window.isOpen()) {
 		Event event;
 		while (window.pollEvent(event)) {
@@ -59,7 +79,30 @@ void gamePlay() {
 
 		float elapsedTime = clock.restart().asSeconds();		//시간 측정 변수(초 단위)
 		float timebarWidth = (timeRemaining / totalTime) * 800;		//800으로 시작해서 비율만큼 계산
-		timeBar.setSize(Vector2f(timebarWidth, 80));
+		timeBar.setSize(Vector2f(timebarWidth, 80));		// 타임바 크기 설정
+
+		if (!showTeacher && showTeacherTimer >= teacherBackTime) {
+			showTeacher = true;
+			teacherImg.setTexture(teacher_side);
+			showTeacherTimer = 0.0f;  // Reset timer
+
+			if (!showTeacherSide) {
+				showTeacherSide = true;
+				showTeacherSideTimer = 0.0f;  // Reset timer
+			}
+		}
+
+		showTeacherTimer += elapsedTime;
+		if (showTeacherSide) {
+			showTeacherSideTimer += elapsedTime;
+		}
+
+		// Check if more time has passed than teacherSideTime
+		if (showTeacherSide && showTeacherSideTimer >= teacherSideTime) {
+			teacherImg.setTexture(teacher);
+			showTeacherSide = false;
+		}
+
 
 		if (Keyboard::isKeyPressed(Keyboard::Space)) {
 			if (!isSpacePressed) {
@@ -103,7 +146,7 @@ void gamePlay() {
 		window.draw(backgroundImg);
 		window.draw(timeBar);
 		window.draw(teacherImg);
-		window.draw(scoreText);
+;		window.draw(scoreText);
 
 		window.display();
 	}
