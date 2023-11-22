@@ -3,9 +3,10 @@
 
 random_device rng;
 
+int score = 0;
+
 void gamePlay() {
 	RenderWindow window(sf::VideoMode(1500, 1000), L"선생님 몰래 춤추기");
-	int score = 0;
 
 	Font font;
 	Music music;
@@ -21,7 +22,7 @@ void gamePlay() {
 	Texture Stu3_front;
 	Texture Stu3_back;
 
-	uniform_real_distribution<double> dist1(1.0, 4.0);		// 뒤 돌아보고 있을 때의 난수
+	uniform_real_distribution<double> dist1(1.0, 5.0);		// 뒤 돌아보고 있을 때의 난수
 	uniform_real_distribution<double> dist2(1.0, 6.0);		// 앞을 보고 있을 때의 난수
 	
 
@@ -173,6 +174,11 @@ void gamePlay() {
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Space)) {
+			if (isTeacherVisible) {
+				music.stop();
+				window.close();
+				gameEnd(score);
+			}
 			if (!isSpacePressed) {
 				isSpacePressed = true;
 				music.play();		//음악 시작
@@ -217,8 +223,10 @@ void gamePlay() {
 
 		if (timeRemaining <= 0) {
 			cout << "타임아웃오바" << endl;
+			music.stop();
+
 			window.close();
-;			gameEnd();
+;			gameEnd(score);
 		} 
 
 		window.clear(Color::Black);

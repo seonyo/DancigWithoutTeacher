@@ -1,3 +1,9 @@
 #pragma once
+#ifndef GAMEEND_H
+#define GAMEEND_H
 
-void gameEnd();
+extern int score; // extern을 사용하여 선언
+
+void gameEnd(int score);
+
+#endif // GAMEEND_H
