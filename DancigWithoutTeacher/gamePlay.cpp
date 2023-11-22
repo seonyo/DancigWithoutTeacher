@@ -53,6 +53,7 @@ void gamePlay() {
 	Sprite teacherImg(teacher_back);
 	Sprite Student1Img(Stu1_front);
 	Sprite Student2Img(Stu2_front);
+	Sprite Student3Img(Stu3_front);
 
 	backgroundImg.setScale(
 		static_cast<float>(window.getSize().x) / background.getSize().x,
@@ -75,6 +76,7 @@ void gamePlay() {
 
 	bool isSpacePressed = false;		//스페이스 눌림 여부
 
+
 	bool showTeacher = false;
 	float showTeacherTimer = 0.0f;
 	teacherImg.setPosition(1100, 80);
@@ -88,14 +90,20 @@ void gamePlay() {
 	float teacherFrontTime = dist2(rng);
 
 	float studentTime = 0.0f;
+	float spaceTime = 0.0f;
 
 	bool isTeacherVisible = false;
+	bool isSpaceTime = false;
 
 	Student1Img.setPosition(85, 430);
 	Student1Img.setScale(1.8, 2.1);
 
 	Student2Img.setPosition(550, 430);
 	Student2Img.setScale(1.8, 2.1);
+
+
+	Student3Img.setPosition(1015, 430);
+	Student3Img.setScale(1.8, 2.1);
 
 	while (window.isOpen()) {
 		Event event;
@@ -160,7 +168,6 @@ void gamePlay() {
 			}
 		}
 		else {
-
 			Student1Img.setTexture(Studnet);
 			Student2Img.setTexture(Studnet);
 		}
@@ -171,11 +178,23 @@ void gamePlay() {
 				music.play();		//음악 시작
 			}
 			timeRemaining += elapsedTime;		//스페이스를 누르면 증가
+
+			spaceTime += elapsedTime;
+			if (spaceTime > 0.2) {
+					Student3Img.setTexture(Stu3_front);
+			}
+
+			if (spaceTime > 0.4) {
+				Student3Img.setTexture(Stu3_back);
+				spaceTime = 0.0;
+			}
 		}
 		else {
 			isSpacePressed = false;
 			timeRemaining -= elapsedTime;		//스페이스를 누르면 증가
 			music.stop();		//음악 종료
+
+			Student3Img.setTexture(Studnet);
 		}
 
 		timebarWidth = (timeRemaining / totalTime) * 800;		//Timebar 넓이 재설정
@@ -209,6 +228,7 @@ void gamePlay() {
 		window.draw(teacherImg);
 		window.draw(Student1Img);
 		window.draw(Student2Img);
+		window.draw(Student3Img);
 ;		window.draw(scoreText);
 
 		window.display();
