@@ -13,6 +13,7 @@ void gamePlay() {
 	Texture teacher;
 	Texture teacher_back;
 	Texture teacher_side;
+	Texture Studnet;
 	Texture Stu1_front;
 	Texture Stu1_back;
 	Texture Stu2_front;
@@ -46,6 +47,7 @@ void gamePlay() {
 	Stu2_back.loadFromFile("image/Stu2-2.png");
 	Stu3_front.loadFromFile("image/Stu3-1.png");
 	Stu3_back.loadFromFile("image/Stu3-2.png");
+	Studnet.loadFromFile("image/Stu.png");
 
 	Sprite backgroundImg(background);
 	Sprite teacherImg(teacher_back);
@@ -86,6 +88,8 @@ void gamePlay() {
 	float teacherFrontTime = dist2(rng);
 
 	float studentTime = 0.0f;
+
+	bool isTeacherVisible = false;
 
 	Student1Img.setPosition(85, 430);
 	Student1Img.setScale(1.8, 2.1);
@@ -131,25 +135,34 @@ void gamePlay() {
 		if (showTeacherSide && showTeacherSideTimer >= teacherSideTime) {
 			teacherImg.setTexture(teacher);
 			showTeacherSide = false;
+			isTeacherVisible = true;
 		}
 
 		if (showTeacher && showTeacherTimer >= teacherFrontTime) {
 			showTeacher = false;
+			isTeacherVisible = false;
 			teacherImg.setTexture(teacher_back);
 			showTeacherTimer = 0.0f;  // 타이머 초기화
 			teacherBackTime = dist1(rng);  // 다음 teacher_back 이미지가 나타날 랜덤 시간 생성
 		}
 
-		studentTime += elapsedTime;
-		if (studentTime > 0.2) {
-			Student1Img.setTexture(Stu1_back);
-			Student2Img.setTexture(Stu2_back);
-		}
+		if (!isTeacherVisible) {
+			studentTime += elapsedTime;
+			if (studentTime > 0.2) {
+				Student1Img.setTexture(Stu1_back);
+				Student2Img.setTexture(Stu2_back);
+			}
 
-		if (studentTime > 0.4) {
-			Student1Img.setTexture(Stu1_front);
-			Student2Img.setTexture(Stu2_front);
-			studentTime = 0.0;
+			if (studentTime > 0.4) {
+				Student1Img.setTexture(Stu1_front);
+				Student2Img.setTexture(Stu2_front);
+				studentTime = 0.0;
+			}
+		}
+		else {
+
+			Student1Img.setTexture(Studnet);
+			Student2Img.setTexture(Studnet);
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Space)) {
