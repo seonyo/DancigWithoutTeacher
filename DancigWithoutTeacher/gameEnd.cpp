@@ -56,8 +56,22 @@ void gameEnd(int score) {
 	while (window.isOpen()) {
 		Event event;
 		while (window.pollEvent(event)) {
+
 			if (event.type == Event::Closed) {
 				window.close();
+			}
+
+			if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
+				Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
+
+				if (rankingBtn.getGlobalBounds().contains(mousePos)) {
+					window.close();
+					ranking();
+				}
+				if (mainBtn.getGlobalBounds().contains(mousePos)) {
+					window.close();
+					home();
+				}
 			}
 
 		}
