@@ -1,10 +1,11 @@
 #include "all.h"
 #include "StringResource.h"
 #include "Database.h"
+#include "gamePlay.cpp"
 
 string inputString;
 
-void newWindow() {
+void name() {
 	RenderWindow window(sf::VideoMode(1500, 1000), L"¼±»ý´Ô ¸ô·¡ ÃãÃß±â");
 
 	if (!connectToDatabase()) {
@@ -12,7 +13,6 @@ void newWindow() {
 		// µ¥ÀÌÅÍº£ÀÌ½º ¿¬°á ½ÇÆÐ Ã³¸®
 		return;
 	}
-
 
 	Font font;
 
@@ -89,10 +89,12 @@ void newWindow() {
 
 					mysql_close(ConnPtr);
 					window.close();
-					gamePlay();
+					GamePlay game;
+					game.run();
 				}
 			}
 		}
+
 		window.clear(Color::Black);
 		window.draw(backgroundImg);
 		window.draw(inputBackground);

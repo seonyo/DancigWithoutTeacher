@@ -2,4 +2,4 @@
 
 #include "all.h"
 
-void newWindow();
+void name();

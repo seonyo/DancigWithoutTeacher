@@ -67,7 +67,7 @@ void home() {
 				if (startBtn.getGlobalBounds().contains(mousePos)) {
 					cout << "´­·¯Á³´ô´É" << endl;
 					window.close();
-					newWindow();
+					name();
 				}
 				if (rankingBtn.getGlobalBounds().contains(mousePos)) {
 					window.close();
