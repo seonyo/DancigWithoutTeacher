@@ -1,5 +1,6 @@
 #include "all.h"
 
+
 int scroe = 0;
 void gameEnd(int score) {
 	RenderWindow window(sf::VideoMode(1500, 1000), L"선생님 몰래 춤추기");
@@ -20,8 +21,37 @@ void gameEnd(int score) {
 		static_cast<float>(window.getSize().y) / background.getSize().y
 	);
 
+	Text socreTextContent(L"당신의 점수는?", font, 55);
+	socreTextContent.setPosition(180, 240);
+	socreTextContent.setFillColor(Color(0, 0, 0));
 
-	cout << score << endl;
+	Text scoreText(to_string(score), font, 90);
+	scoreText.setPosition(580, 210);
+	scoreText.setFillColor(Color(50, 99, 159));
+
+	Text gameOverText(L"칠판 보세요 칠판~", font, 90);
+	gameOverText.setPosition(180, 400);
+	gameOverText.setFillColor(Color(196, 0, 0));
+
+
+	//버튼 생성
+	RectangleShape rankingBtn(Vector2f(220, 70));
+	rankingBtn.setFillColor(Color(0, 99, 28));
+	rankingBtn.setPosition(180, 600);
+
+
+	Text rankingBtnText(L"랭킹보기", font, 30);
+	rankingBtnText.setFillColor(Color(255, 255, 255));
+	rankingBtnText.setPosition(233, 618);
+
+	RectangleShape mainBtn(Vector2f(220, 70));
+	mainBtn.setFillColor(Color(0, 99, 28));
+	mainBtn.setPosition(450, 600);
+
+	Text mainBtnText(L"메인으로", font, 30);
+	mainBtnText.setFillColor(Color(255, 255, 255));
+	mainBtnText.setPosition(503, 618);
+
 
 	while (window.isOpen()) {
 		Event event;
@@ -35,6 +65,13 @@ void gameEnd(int score) {
 		window.clear(Color::Black);
 
 		window.draw(backgroundImg);
+		window.draw(socreTextContent);
+		window.draw(scoreText);
+		window.draw(gameOverText);
+		window.draw(rankingBtn);
+		window.draw(rankingBtnText);
+		window.draw(mainBtn);
+		window.draw(mainBtnText);
 
 		window.display();
 	}
