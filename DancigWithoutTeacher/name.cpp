@@ -2,6 +2,7 @@
 #include "StringResource.h"
 #include "Database.h"
 #include "gamePlay.cpp"
+#include <Windows.h>
 
 string inputString;
 
@@ -82,15 +83,20 @@ void name() {
 			if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
 				Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
 
-				if (nextBtn.getGlobalBounds().contains(mousePos)) {
-					string query = "INSERT INTO info (name) VALUES ('" + inputString + "')";
-					const char* Query = query.c_str();		// C Style 문자열로 변환하기 (mysql 쿼리문에선 C스타일만 받기 때문)
-					Stat = mysql_query(ConnPtr, Query);		//쿼리문 성공여부
+				if (inputString == "") {
+					MessageBox(NULL, L"닉네임을 입력하세요", L"경고", MB_OK);
+				}
+				else {
+					if (nextBtn.getGlobalBounds().contains(mousePos)) {
+						string query = "INSERT INTO info (name) VALUES ('" + inputString + "')";
+						const char* Query = query.c_str();		// C Style 문자열로 변환하기 (mysql 쿼리문에선 C스타일만 받기 때문)
+						Stat = mysql_query(ConnPtr, Query);		//쿼리문 성공여부
 
-					mysql_close(ConnPtr);
-					window.close();
-					GamePlay game;
-					game.run();
+						mysql_close(ConnPtr);
+						window.close();
+						GamePlay game;
+						game.run();
+					}
 				}
 			}
 		}
