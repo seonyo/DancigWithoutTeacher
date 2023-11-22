@@ -1,7 +1,9 @@
 #include "all.h"
+#include "StringResource.h"
+
+string inputString;
 
 void newWindow() {
-
 	//DB 연결
 	MYSQL Conn;		//db 정보를 담는 것
 	MYSQL* ConnPtr = NULL;		//db 핸들
@@ -33,7 +35,6 @@ void newWindow() {
 
 	Texture background;
 	Texture nameContent;
-	string inputString;
 
 	background.loadFromFile("image/background.png");
 	nameContent.loadFromFile("image/idContent.png");

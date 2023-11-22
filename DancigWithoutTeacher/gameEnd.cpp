@@ -1,10 +1,12 @@
 #include "all.h"
-
+#include "StringResource.h"
 
 int scroe = 0;
 void gameEnd(int score) {
 	RenderWindow window(sf::VideoMode(1500, 1000), L"¼±»ý´Ô ¸ô·¡ ÃãÃß±â");
 	Font font;
+
+	cout << inputString;
 
 	if (!font.loadFromFile("Font/KimjungchulMyungjo-Bold.ttf"))
 	{
