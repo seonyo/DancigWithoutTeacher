@@ -147,8 +147,6 @@
     <ClCompile Include="home.cpp" />
     <ClCompile Include="ranking.cpp" />
     <ClCompile Include="StringResource.h" />
-    <ClCompile Include="teacherSelect.cpp" />
-    <ClCompile Include="teacherSelect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="all.h" />

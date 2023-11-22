@@ -51,12 +51,12 @@ void newWindow() {
 	//idContent 설정
 	contentImg.setPosition(520, 380);
 
-	//다음으로 버튼 생성 및 설정
+	//게임시작 버튼 생성 및 설정
 	RectangleShape nextBtn(Vector2f(220, 70));
 	nextBtn.setFillColor(Color(0, 99, 28));
 	nextBtn.setPosition(1150, 810);
 
-	Text nextBtnText(L"다음으로", font, 30);
+	Text nextBtnText(L"게임시작", font, 30);
 	nextBtnText.setFillColor(Color(255, 255, 255));
 	nextBtnText.setPosition(1200, 827);
 
@@ -89,7 +89,7 @@ void newWindow() {
 
 					mysql_close(ConnPtr);
 					window.close();
-					teacherSelect();
+					gamePlay();
 				}
 			}
 		}

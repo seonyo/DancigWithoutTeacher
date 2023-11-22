@@ -39,8 +39,7 @@ void teacherSelect() {
 
 	//營團T
 	CircleShape ljmShape(130);
-	ljmShape.setFillColor(Color(255, 255, 255));
-	ljmShape.setPosition(450, 360);
+	ljmShape.setFillColor(Color(255, 255, 255));	ljmShape.setPosition(450, 360);
 
 	Text ljmText(L"營團T", font, 28);
 	ljmText.setFillColor(Color(255, 255, 255));
