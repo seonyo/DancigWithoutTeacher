@@ -20,8 +20,8 @@ void gamePlay() {
 	Texture Stu3_front;
 	Texture Stu3_back;
 
-	uniform_real_distribution<double> dist1(1.0, 8.0);		// 뒤 돌아보고 있을 때의 난수
-	uniform_real_distribution<double> dist2(1.0, 5.0);		// 앞을 보고 있을 때의 난수
+	uniform_real_distribution<double> dist1(1.0, 4.0);		// 뒤 돌아보고 있을 때의 난수
+	uniform_real_distribution<double> dist2(1.0, 6.0);		// 앞을 보고 있을 때의 난수
 	
 
 	if (!font.loadFromFile("Font/JalnanGothicTTF.ttf"))
@@ -34,6 +34,8 @@ void gamePlay() {
 		return;
 	}
 
+
+	// 이미지 불러오기
 	background.loadFromFile("image/GamePlayBackground.png");		//배경 이미지
 	teacher.loadFromFile("image/SMS.png");		// 명수 정면 이미지
 	teacher_back.loadFromFile("image/SMS_Back.png");	//명수 뒷모습 이미지
@@ -47,6 +49,8 @@ void gamePlay() {
 
 	Sprite backgroundImg(background);
 	Sprite teacherImg(teacher_back);
+	Sprite Student1Img(Stu1_front);
+	Sprite Student2Img(Stu2_front);
 
 	backgroundImg.setScale(
 		static_cast<float>(window.getSize().x) / background.getSize().x,
@@ -80,6 +84,14 @@ void gamePlay() {
 
 	float teacherBackTime = dist1(rng);
 	float teacherFrontTime = dist2(rng);
+
+	float studentTime = 0.0f;
+
+	Student1Img.setPosition(85, 430);
+	Student1Img.setScale(1.8, 2.1);
+
+	Student2Img.setPosition(550, 430);
+	Student2Img.setScale(1.8, 2.1);
 
 	while (window.isOpen()) {
 		Event event;
@@ -128,7 +140,17 @@ void gamePlay() {
 			teacherBackTime = dist1(rng);  // 다음 teacher_back 이미지가 나타날 랜덤 시간 생성
 		}
 
+		studentTime += elapsedTime;
+		if (studentTime > 0.2) {
+			Student1Img.setTexture(Stu1_back);
+			Student2Img.setTexture(Stu2_back);
+		}
 
+		if (studentTime > 0.4) {
+			Student1Img.setTexture(Stu1_front);
+			Student2Img.setTexture(Stu2_front);
+			studentTime = 0.0;
+		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Space)) {
 			if (!isSpacePressed) {
@@ -172,6 +194,8 @@ void gamePlay() {
 		window.draw(backgroundImg);
 		window.draw(timeBar);
 		window.draw(teacherImg);
+		window.draw(Student1Img);
+		window.draw(Student2Img);
 ;		window.draw(scoreText);
 
 		window.display();
