@@ -7,19 +7,21 @@ void gameEnd(int score) {
 
 	if (!connectToDatabase()) {
 		cout << "데이터베이스 연결 실패" << endl;
-		// 데이터베이스 연결 실패 처리
 		return;
 	}
 
 	string query = "UPDATE info SET score = '" + to_string(score) + "' WHERE name = '" + inputString + "'";
 	const char* Query = query.c_str();		// C Style 문자열로 변환하기 (mysql 쿼리문에선 C스타일만 받기 때문)
 	Stat = mysql_query(ConnPtr, Query);		//쿼리문 성공여부
+	
 
+	//쿼리문이 실패했다면 에러 메세지 출력
 	if (Stat != 0) {
+		//stderr을 출력하려면 fprintf를 사용해야 함
 		fprintf(stderr, "Mysql qerry error : %s\n", mysql_error(&Conn));
 	}
 
-	mysql_close(ConnPtr);
+	closeDatabase();
 
 	RenderWindow window(sf::VideoMode(1500, 1000), L"선생님 몰래 춤추기");
 	Font font;
