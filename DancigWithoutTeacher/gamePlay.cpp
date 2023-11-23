@@ -49,12 +49,13 @@ private:
 
     int score;
 
+    //난수 함수
     random_device rng;
-    uniform_real_distribution<double> dist1;
+    uniform_real_distribution<double> dist1;        // 부동 소수점 생성
     uniform_real_distribution<double> dist2;
 
 public:
-    GamePlay() : dist1(1.0, 5.0), dist2(1.0, 6.0) {
+    GamePlay() : dist1(1.0, 5.0), dist2(1.0, 6.0) {     // 함수 초기하ㅗ 후 initialize를 실행
         initialize();
     }
 
@@ -112,6 +113,7 @@ public:
         Student3Img.setPosition(1015, 430);
         Student3Img.setScale(1.8, 2.);
 
+        //시간 관련 변수 초기화
         totalTime = 17.0f;
         timeRemaining = totalTime;
         scoreTimer = 0.0f;
@@ -129,9 +131,7 @@ public:
         isSpaceTime = false;
         score = 0;
 
-        random_device rng;
-        uniform_real_distribution<double> dist1;
-        uniform_real_distribution<double> dist2;
+        
     }
 
     void handleInput() {
@@ -143,6 +143,7 @@ public:
             }
         }
 
+        //시간을 재는 변수
         float elapsedTime = clock.restart().asSeconds();
         float timebarWidth = (timeRemaining / totalTime) * 800;
         timeBar.setSize(Vector2f(timebarWidth, 80));
@@ -150,6 +151,7 @@ public:
         teacherImg.setPosition(1200, 80);
         teacherImg.setScale(1.3, 1.4);
 
+        // 선생님 도는 동작
         if (!showTeacher && showTeacherTimer >= teacherBackTime) {
             showTeacher = true;
             teacherImg.setTexture(teacher_side);
@@ -166,13 +168,15 @@ public:
         if (showTeacherSide) {
             showTeacherSideTimer += elapsedTime;
         }
-
+        
+        //선생님 앞 보고 있는 동작
         if (showTeacherSide && showTeacherSideTimer >= teacherSideTime) {
             teacherImg.setTexture(teacher);
             showTeacherSide = false;
             isTeacherVisible = true;
         }
 
+        //선생님 뒤 보고 있는 동작
         if (showTeacher && showTeacherTimer >= teacherFrontTime) {
             showTeacher = false;
             isTeacherVisible = false;

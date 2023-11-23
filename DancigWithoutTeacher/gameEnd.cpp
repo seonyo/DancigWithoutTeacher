@@ -16,6 +16,7 @@ void gameEnd(int score) {
 	const char* Query = query.c_str();		// C Style 문자열로 변환하기 (mysql 쿼리문에선 C스타일만 받기 때문)
 	Stat = mysql_query(ConnPtr, Query);		//쿼리문 성공여부
 	
+	inputString = "";
 
 	//쿼리문이 실패했다면 에러 메세지 출력
 	if (Stat != 0) {
