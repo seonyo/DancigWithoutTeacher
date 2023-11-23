@@ -42,6 +42,9 @@
     <ClCompile Include="teacher.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="student.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="all.h">
@@ -63,6 +66,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="teacher.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="student.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
