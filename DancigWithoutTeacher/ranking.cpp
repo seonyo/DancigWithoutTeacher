@@ -2,7 +2,7 @@
 #include "Database.h"
 
 void ranking() {
-    RenderWindow window(sf::VideoMode(1500, 1000), L"¼±»ý´Ô ¸ô·¡ ÃãÃß±â");
+    RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), L"¼±»ý´Ô ¸ô·¡ ÃãÃß±â");
 
     if (!connectToDatabase()) {
         cout << "µ¥ÀÌÅÍº£ÀÌ½º ¿¬°á ½ÇÆÐ" << endl;

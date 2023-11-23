@@ -41,7 +41,7 @@ public:
     }
 
     void initialize() {
-        window.create(sf::VideoMode(1500, 1000), L"선생님 몰래 춤추기");
+        window.create(sf::VideoMode(WIDTH, HEIGHT), L"선생님 몰래 춤추기");
 
         if (!font.loadFromFile("Font/JalnanGothicTTF.ttf")) {
             printf("폰트 불러오기 실패");

@@ -10,3 +10,6 @@ using namespace sf;
 #include "gamePlay.h"
 #include "gameEnd.h"
 #include "ranking.h"
+
+#define WIDTH 1500
+#define HEIGHT 1000

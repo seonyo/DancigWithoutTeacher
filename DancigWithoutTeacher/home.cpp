@@ -1,7 +1,7 @@
 #include "all.h"
 
 void home() {
-	RenderWindow window(sf::VideoMode(1500, 1000), L"¼±»ý´Ô ¸ô·¡ ÃãÃß±â");
+	RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), L"¼±»ý´Ô ¸ô·¡ ÃãÃß±â");
 
 	Font font;
 

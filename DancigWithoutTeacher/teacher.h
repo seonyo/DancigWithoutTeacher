@@ -24,6 +24,5 @@ private:
 
 public:
 	teacher();
-
 	void teacherTurnTime(float elapsedTime);
 };

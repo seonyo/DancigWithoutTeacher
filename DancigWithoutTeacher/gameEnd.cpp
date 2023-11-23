@@ -2,7 +2,9 @@
 #include "StringResource.h"
 #include "Database.h"
 
+//Àü¿ªº¯¼ö score »ý¼º
 int scroe = 0;
+
 void gameEnd(int score) {
 
 	if (!connectToDatabase()) {
@@ -23,7 +25,7 @@ void gameEnd(int score) {
 
 	closeDatabase();
 
-	RenderWindow window(sf::VideoMode(1500, 1000), L"¼±»ý´Ô ¸ô·¡ ÃãÃß±â");
+	RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), L"¼±»ý´Ô ¸ô·¡ ÃãÃß±â");
 	Font font;
 
 
