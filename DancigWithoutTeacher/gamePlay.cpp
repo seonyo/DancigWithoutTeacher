@@ -1,4 +1,5 @@
 #include "all.h"
+#include "teacher.h"
 #include <random>
 
 class GamePlay {
@@ -9,9 +10,6 @@ private:
     Font font;
     Music music;
     Texture background;
-    Texture teacher;
-    Texture teacher_back;
-    Texture teacher_side;
     Texture Studnet;
     Texture Stu1_front;
     Texture Stu1_back;
@@ -21,7 +19,6 @@ private:
     Texture Stu3_back;
 
     Sprite backgroundImg;
-    Sprite teacherImg;
     Sprite Student1Img;
     Sprite Student2Img;
     Sprite Student3Img;
@@ -35,23 +32,19 @@ private:
     float scoreTimer;
 
     bool isSpacePressed;
-    bool showTeacher;
-    float showTeacherTimer;
-    float showTeacherSideTimer;
-    bool showTeacherSide;
-    float teacherSideTime;
-    float teacherBackTime;
-    float teacherFrontTime;
     float studentTime;
     float spaceTime;
     bool isTeacherVisible;
     bool isSpaceTime;
-
     int score;
+
+    teacher teacher; 
 
     random_device rng;
     uniform_real_distribution<double> dist1;
     uniform_real_distribution<double> dist2;
+
+
 
 public:
     GamePlay() : dist1(1.0, 5.0), dist2(1.0, 6.0) {
@@ -72,9 +65,6 @@ public:
 
         // 이미지 불러오기
         background.loadFromFile("image/GamePlayBackground.png");
-        teacher.loadFromFile("image/SMS.png");
-        teacher_back.loadFromFile("image/SMS_Back.png");
-        teacher_side.loadFromFile("image/SMS_Side.png");
         Stu1_front.loadFromFile("image/Stu1-1.png");
         Stu1_back.loadFromFile("image/Stu1-2.png");
         Stu2_front.loadFromFile("image/Stu2-1.png");
@@ -84,7 +74,6 @@ public:
         Studnet.loadFromFile("image/Stu.png");
 
         backgroundImg.setTexture(background);
-        teacherImg.setTexture(teacher_back);
         Student1Img.setTexture(Stu1_front);
         Student2Img.setTexture(Stu2_front);
         Student3Img.setTexture(Stu3_front);
@@ -116,22 +105,18 @@ public:
         timeRemaining = totalTime;
         scoreTimer = 0.0f;
         isSpacePressed = false;
-        showTeacher = false;
-        showTeacherTimer = 0.0f;
-        showTeacherSideTimer = 0.0f;
-        showTeacherSide = false;
-        teacherSideTime = 0.25f;
-        teacherBackTime = dist1(rng);
-        teacherFrontTime = dist2(rng);
+        //teacherBackTime = dist1(rng);
+        //teacherFrontTime = dist2(rng);
         studentTime = 0.0f;
         spaceTime = 0.0f;
-        isTeacherVisible = false;
         isSpaceTime = false;
         score = 0;
 
         random_device rng;
         uniform_real_distribution<double> dist1;
         uniform_real_distribution<double> dist2;
+
+        teacher.teacherTurnTime(0.0);
     }
 
     void handleInput() {
@@ -147,39 +132,7 @@ public:
         float timebarWidth = (timeRemaining / totalTime) * 800;
         timeBar.setSize(Vector2f(timebarWidth, 80));
 
-        teacherImg.setPosition(1200, 80);
-        teacherImg.setScale(1.3, 1.4);
-
-        if (!showTeacher && showTeacherTimer >= teacherBackTime) {
-            showTeacher = true;
-            teacherImg.setTexture(teacher_side);
-            showTeacherTimer = 0.0f;
-
-            if (!showTeacherSide) {
-                showTeacherSide = true;
-                showTeacherSideTimer = 0.0f;
-            }
-        }
-
-        showTeacherTimer += elapsedTime;
-
-        if (showTeacherSide) {
-            showTeacherSideTimer += elapsedTime;
-        }
-
-        if (showTeacherSide && showTeacherSideTimer >= teacherSideTime) {
-            teacherImg.setTexture(teacher);
-            showTeacherSide = false;
-            isTeacherVisible = true;
-        }
-
-        if (showTeacher && showTeacherTimer >= teacherFrontTime) {
-            showTeacher = false;
-            isTeacherVisible = false;
-            teacherImg.setTexture(teacher_back);
-            showTeacherTimer = 0.0f;
-            teacherBackTime = dist1(rng);
-        }
+        teacher.teacherTurnTime(elapsedTime);
 
         if (!isTeacherVisible) {
             studentTime += elapsedTime;
@@ -258,7 +211,6 @@ public:
 
         window.draw(backgroundImg);
         window.draw(timeBar);
-        window.draw(teacherImg);
         window.draw(Student1Img);
         window.draw(Student2Img);
         window.draw(Student3Img);
