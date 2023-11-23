@@ -13,15 +13,13 @@ void ranking() {
 
 	Texture background;
 	Texture rankigContent;
-	Texture contentBackground;
 
-	background.loadFromFile("image/background.png");
+	background.loadFromFile("image/RankingBackground.png");
 	rankigContent.loadFromFile("image/rankingContent.png");
-	contentBackground.loadFromFile("image/rankingContentBackground.png");
 
 	Sprite backgroundImg(background);
-	Sprite rankingContemtImg(rankigContent);
-	Sprite contentBackgroundImg(contentBackground);
+
+	RectangleShape rankingBackground;
 
 	// 이미지 크기를 창 크기에 맞게 조절 (비율 계산)
 	backgroundImg.setScale(
@@ -29,11 +27,13 @@ void ranking() {
 		static_cast<float>(window.getSize().y) / background.getSize().y
 	);
 
-	rankingContemtImg.setPosition(650, 100);
 
 	//db에서 랭킹 select
 	const char* Query = "SELECT * FROM info ORDER BY score DESC limit 5";
 	Stat = mysql_query(ConnPtr, Query);
+
+	int rowCount = 0;
+	int recY = 200;
 
 	Result = mysql_store_result(ConnPtr);		//결과 확인하기
 	while ((Row = mysql_fetch_row(Result)) != NULL) {
@@ -52,7 +52,6 @@ void ranking() {
 
 		}
 		window.draw(backgroundImg);
-		window.draw(rankingContemtImg);
 
 		window.display();
 	}
