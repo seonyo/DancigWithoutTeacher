@@ -20,6 +20,14 @@ void ranking() {
     background.loadFromFile("image/RankingBackground.png");
     Sprite backgroundImg(background);
 
+    Texture arrow;
+    arrow.loadFromFile("image/arrow.png");
+    Sprite arrowImg(arrow);
+
+    arrowImg.setPosition(100, 100);
+    arrowImg.setScale(1.8, 1.8);
+
+
     // 이미지 크기를 창 크기에 맞게 조절 (비율 계산)
     backgroundImg.setScale(
         static_cast<float>(window.getSize().x) / background.getSize().x,
@@ -58,6 +66,8 @@ void ranking() {
     mysql_free_result(Result);
     closeDatabase();
 
+    window.draw(arrowImg);
+
     window.display();
 
     while (window.isOpen()) {
@@ -66,6 +76,16 @@ void ranking() {
             if (event.type == Event::Closed) {
                 window.close();
             }
+
+            if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
+                Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
+
+                if (arrowImg.getGlobalBounds().contains(mousePos)) {
+                    window.close();
+                    home();
+                }
+            }
+
         }
     }
 }
